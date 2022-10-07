@@ -22,10 +22,33 @@ public class Segitiga extends AppCompatActivity {
         hitung.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                double a = Double.parseDouble(alas.getText().toString());
-                double t = Double.parseDouble(tinggi.getText().toString());
-                double l = 0.5 * a * t;
-                luas.setText(String.valueOf(l));
+                String inputAlas = alas.getText().toString();
+                String inputTinggi = tinggi.getText().toString();
+
+                try {
+                    if(inputAlas.isEmpty()) {
+                        alas.setError("Alas tidak boleh kosong");
+                    }
+
+                    if(inputTinggi.isEmpty()) {
+                        tinggi.setError("Tinggi tidak boleh kosong");
+                    }
+
+                    if(!inputAlas.matches("[0-9]+")) {
+                        alas.setError("Alas harus berupa angka");
+                    }
+
+                    if(!inputTinggi.matches("[0-9]+")) {
+                        tinggi.setError("Tinggi harus berupa angka");
+                    }
+
+                    double a = Double.parseDouble(inputAlas);
+                    double t = Double.parseDouble(inputTinggi);
+                    double hasil = 0.5 * a * t;
+                    luas.setText(String.valueOf(hasil));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
